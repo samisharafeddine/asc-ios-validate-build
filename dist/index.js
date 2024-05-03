@@ -764,16 +764,16 @@ module.exports = (request, delays, options) => {
 			/* istanbul ignore next: hard to test */
 			if (socket.connecting) {
 				socket.once('connect', () => {
-					request.once('upload-complete', timeRequest());
+					request.once('validation-complete', timeRequest());
 				});
 			} else {
-				request.once('upload-complete', timeRequest());
+				request.once('uploadvalidation-complete', timeRequest());
 			}
 		});
 	}
 
 	if (delays.response !== undefined) {
-		request.once('upload-complete', () => {
+		request.once('validation-complete', () => {
 			const cancelTimeout = addTimeout(delays.response, timeoutHandler, 'response');
 			request.once('response', cancelTimeout);
 		});
@@ -1917,7 +1917,7 @@ function uploadApp(appPath, appType, apiKeyId, issuerId, options) {
             'altool',
             '--output-format',
             'xml',
-            '--upload-app',
+            '--validate',
             '--file',
             appPath,
             '--type',
