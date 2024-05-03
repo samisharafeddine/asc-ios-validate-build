@@ -1,0 +1,29 @@
+name: 'Validate iOS app in App Store Connect'
+description: 'Validates iOS app in App Store Connect'
+author: 'Sami Sharafeddine'
+inputs:
+  app-path:
+    description: 'The path to the app (ipa etc)'
+    required: true
+  app-type:
+    description: 'The type of app to upload (osx | ios | appletvos)'
+    required: true
+    default: 'ios'
+  issuer-id:
+    description: 'The App Store Connect API Key Issuer Identifier'
+    required: true
+  api-key-id:
+    description: 'The Key ID for AppStore Connect API'
+    required: true
+  api-private-key:
+    description: 'The PKCS8 format Private Key for App Store Connect API'
+    required: true
+outputs:
+  altool-response:
+    description: 'XML output from altool'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+branding:
+  icon: 'arrow-up-circle'
+  color: 'blue'
